@@ -1,0 +1,345 @@
+/* 像素暗黑风格样式 */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', monospace;
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 50%, #16213e 100%);
+    color: #e8e8e8;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 背景像素网格 */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* 游戏头部 */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 2px solid #4a4a4a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.score-container, .progress-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.nes-text {
+    color: #93a8ff;
+    font-size: 10px;
+    text-shadow: 0 0 10px rgba(147, 168, 255, 0.5);
+}
+
+/* 游戏主界面 */
+.game-screen, .result-screen {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    padding: 30px;
+    border: 3px solid #4a4a4a;
+    box-shadow:
+        0 0 20px rgba(147, 168, 255, 0.2),
+        inset 0 0 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+/* 单词显示区域 */
+.word-display {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.word-display .nes-container {
+    background: linear-gradient(135deg, #2d2d44 0%, #1f1f33 100%);
+    border-color: #6a6a8a;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.word-display .title {
+    font-size: 28px;
+    color: #ffd700;
+    text-shadow:
+        0 0 20px rgba(255, 215, 0, 0.6),
+        2px 2px 0 #ff6b6b;
+    margin: 10px 0;
+    letter-spacing: 2px;
+}
+
+/* 例句显示区域 */
+.sentence-display {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.sentence-display .nes-container {
+    background: linear-gradient(135deg, #24243a 0%, #1a1a2e 100%);
+    border-color: #5a5a7a;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.sentence-display .title {
+    color: #8eb8ff;
+    margin-bottom: 15px;
+}
+
+.sentence-display p {
+    font-size: 12px;
+    line-height: 1.8;
+    color: #d0d0d0;
+    text-shadow: 0 0 5px rgba(208, 208, 208, 0.3);
+}
+
+/* 选项按钮容器 */
+.options-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.nes-btn {
+    font-family: 'Press Start 2P', monospace !important;
+    font-size: 11px !important;
+    padding: 15px 10px !important;
+    min-height: 60px !important;
+    background: linear-gradient(135deg, #4a69bd 0%, #1e3799 100%) !important;
+    border-color: #6a89cc !important;
+    color: #ffffff !important;
+    border-width: 3px !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease !important;
+    box-shadow:
+        0 4px 0 #2c3e50,
+        0 6px 10px rgba(0, 0, 0, 0.4) !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.nes-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.nes-btn:hover::before {
+    left: 100%;
+}
+
+.nes-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 0 #2c3e50,
+        0 8px 15px rgba(0, 0, 0, 0.5) !important;
+    background: linear-gradient(135deg, #5a79cd 0%, #2e47a9 100%) !important;
+}
+
+.nes-btn:active {
+    transform: translateY(2px);
+    box-shadow:
+        0 2px 0 #2c3e50,
+        0 4px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+.nes-btn.is-success {
+    background: linear-gradient(135deg, #27ae60 0%, #16a085 100%) !important;
+    border-color: #2ecc71 !important;
+    animation: success-pulse 1s ease;
+}
+
+.nes-btn.is-error {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+    border-color: #ec7063 !important;
+    animation: error-shake 0.5s ease;
+}
+
+@keyframes success-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes error-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* 结果界面 */
+.result-screen {
+    text-align: center;
+}
+
+.result-screen .nes-container {
+    background: linear-gradient(135deg, #2d2d44 0%, #1f1f33 100%);
+    border-color: #6a6a8a;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.result-screen .title {
+    font-size: 24px;
+    color: #ffd700;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    margin-bottom: 20px;
+}
+
+.result-stats {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 2px solid #4a4a4a;
+}
+
+.result-stats p {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.recent-scores {
+    margin: 30px 0;
+    text-align: left;
+}
+
+.recent-scores h3 {
+    font-size: 12px;
+    color: #8eb8ff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.recent-scores ul {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.recent-scores li {
+    font-size: 10px;
+    color: #d0d0d0;
+    margin: 8px 0;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.result-actions {
+    margin-top: 30px;
+}
+
+#restartBtn {
+    font-size: 14px !important;
+    padding: 20px 40px !important;
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%) !important;
+    border-color: #f1c40f !important;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .game-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .word-display .title {
+        font-size: 20px;
+    }
+
+    .sentence-display p {
+        font-size: 10px;
+    }
+
+    .options-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .nes-btn {
+        font-size: 10px !important;
+        padding: 12px 8px !important;
+        min-height: 50px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .word-display .title {
+        font-size: 16px;
+    }
+
+    .sentence-display p {
+        font-size: 9px;
+    }
+
+    .nes-btn {
+        font-size: 9px !important;
+        padding: 10px 6px !important;
+        min-height: 45px !important;
+    }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6a6a8a;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8a8aaa;
+}

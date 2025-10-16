@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CET-6 单词游戏</title>
+    <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="game-header">
+            <div class="score-container">
+                <span class="nes-text">得分: <span id="score">0</span></span>
+                <span class="nes-text">最高分: <span id="highScore">0</span></span>
+            </div>
+            <div class="progress-container">
+                <span class="nes-text">题目: <span id="currentQuestion">1</span>/10</span>
+            </div>
+        </div>
+
+        <div class="game-screen" id="gameScreen">
+            <div class="word-display">
+                <div class="nes-container with-title is-centered">
+                    <p class="title" id="word">Loading...</p>
+                </div>
+            </div>
+
+            <div class="sentence-display">
+                <div class="nes-container with-title is-centered">
+                    <p class="title">例句</p>
+                    <p id="sentence">Loading sentence...</p>
+                </div>
+            </div>
+
+            <div class="options-container">
+                <button class="nes-btn is-primary" data-index="0" id="option0">选项 1</button>
+                <button class="nes-btn is-primary" data-index="1" id="option1">选项 2</button>
+                <button class="nes-btn is-primary" data-index="2" id="option2">选项 3</button>
+                <button class="nes-btn is-primary" data-index="3" id="option3">选项 4</button>
+            </div>
+        </div>
+
+        <div class="result-screen" id="resultScreen" style="display: none;">
+            <div class="nes-container with-title is-centered">
+                <p class="title">游戏结束！</p>
+                <div class="result-stats">
+                    <p>本次得分: <span id="finalScore" class="nes-text is-primary">0</span></p>
+                    <p>最高分: <span id="finalHighScore" class="nes-text is-success">0</span></p>
+                </div>
+
+                <div class="recent-scores">
+                    <h3>最近10次成绩:</h3>
+                    <ul id="recentScores" class="nes-list is-disc"></ul>
+                </div>
+
+                <div class="result-actions">
+                    <button class="nes-btn is-primary" id="restartBtn">再玩一次</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="correctSound" preload="auto"></audio>
+    <audio id="wrongSound" preload="auto"></audio>
+
+    <script src="app.js"></script>
+</body>
+</html>
