@@ -1,0 +1,9 @@
+@service({title: "CET-6 Game", version: "1.0.0"})
+namespace Game;
+@route("/word")
+@get op getWord(): {
+  word: string;
+  sentence: string;
+  options: string[];
+  answerIndex: 0..3;
+};

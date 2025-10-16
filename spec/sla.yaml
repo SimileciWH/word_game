@@ -1,0 +1,6 @@
+sla:
+  targetP95: 2000        # ms
+  targetScore: 80        # %
+  volumeSwitch: true
+  currentP95: 0
+  currentScore: 0
