@@ -1,24 +1,12 @@
 {
   "name": "word_game",
   "version": "1.0.0",
-  "description": "help to remember words",
-  "scripts": {
-    "test": "vitest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SimileciWH/word_game.git"
-  },
-  "keywords": [],
+  "description": "CET-6 vocabulary learning game",
+  "keywords": ["game", "education", "vocabulary", "cet6"],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/SimileciWH/word_game/issues"
-  },
-  "homepage": "https://github.com/SimileciWH/word_game#readme",
-  "devDependencies": {
-    "@types/node": "^24.8.0",
-    "typescript": "^5.9.3",
-    "vitest": "^3.2.4"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SimileciWH/word_game.git"
   }
 }
