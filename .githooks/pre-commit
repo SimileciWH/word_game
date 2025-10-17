@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# pre-commit hook - 额外的防护措施
+# 检查是否有可疑的提交行为
+
+# 检查是否来自 git-cz
+if [ "$GIT CZ" = "true" ] || [ "$CONVENTIONAL_COMMIT" = "true" ]; then
+    echo "✅ git-cz 提交验证通过"
+    exit 0
+fi
+
+# 检查是否是合并提交
+if [ "$GIT_MERGE_VERBOSITY" != "" ]; then
+    echo "✅ 合并操作，允许继续"
+    exit 0
+fi
+
+# 检查是否有暂存的文件
+STAGED_FILES=$(git diff --cached --name-only)
+if [ -z "$STAGED_FILES" ]; then
+    echo "⚠️  没有暂存的文件，无需提交"
+    exit 1
+fi
+
+echo "⚠️  警告：检测到可能不是 git-cz 的提交尝试"
+echo ""
+echo "🚫 强制要求：请使用 'git-cz' 进行提交"
+echo ""
+echo "如果确实需要跳过此检查，使用："
+echo "git commit --no-verify -m 'message'"
+echo ""
+echo "强烈建议使用 git-cz 以保持提交信息的一致性！"
+echo ""
+read -p "继续提交？(y/N): " confirm
+
+if [[ $confirm != [yY] ]]; then
+    echo "❌ 提交已取消"
+    exit 1
+fi
+
+echo "⚠️  已绕过建议，继续提交..."
+exit 0

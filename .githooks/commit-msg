@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# 强制使用 git-cz 的 commit-msg hook
+# 拦截所有非 git-cz 提交
+
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+# 检查环境变量，判断是否来自 git-cz
+if [ "$GIT CZ" = "true" ] || [ "$CONVENTIONAL_COMMIT" = "true" ]; then
+    echo "✅ 来自 git-cz 的提交，允许继续"
+    exit 0
+fi
+
+# 检查是否是合并提交（允许自动合并提交）
+if [ "$2" = "merge" ]; then
+    echo "✅ 合并提交，允许继续"
+    exit 0
+fi
+
+# 检查提交消息是否包含约定式提交格式（可能是 git-cz 生成的）
+if [[ "$COMMIT_MSG" =~ ^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\(.+\))?: .+ ]]; then
+    echo "⚠️  检测到约定式提交格式，但请确认您使用了 git-cz"
+    echo "   如果这不是来自 git-cz，请使用 'git-cz' 重新提交"
+    read -p "继续提交吗？(y/N): " confirm
+    if [[ $confirm != [yY] ]]; then
+        echo "❌ 提交已取消"
+        exit 1
+    fi
+    exit 0
+fi
+
+# 如果不是约定式提交格式，阻止提交
+echo "🚫 检测到非约定式提交！"
+echo ""
+echo "❌ 禁止使用 'git commit' 直接提交"
+echo "✅ 请使用 'git-cz' 进行约定式提交"
+echo ""
+echo "正确的提交流程："
+echo "1. 添加文件: git add <files>"
+echo "2. 使用 git-cz: git-cz"
+echo "3. 按照提示选择提交类型和描述"
+echo ""
+echo "如果确实是紧急情况，可以使用以下命令强制提交："
+echo "git commit --no-verify -m 'your message'"
+echo ""
+exit 1
